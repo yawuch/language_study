@@ -1,0 +1,2 @@
+copy many files to another place:
+cp /var/fpwork/yawu/{5G19B_B3_pitSetup.sh,5G19B_FDD_pitSetup.sh,5G20A_B1_pitSetup.sh,pitSetup.sh,SBTS20B_pitSetup.sh,SBTS20C_pitSetup.sh,xl19a_pitSetup.sh} ./
