@@ -1,0 +1,228 @@
+////////////////////////////////////////////////////////////////////////
+//login server locally
+mysql -u root -h 10.135.157.122 -p'123456'
+mysql -u root -h 10.159.111.192 -P 3306 -D mysql -p
+
+//display existing databases:
+show databases;
+
+//select database;
+use databaseName;
+
+//display system attributes:
+show full processlist;
+SHOW VARIABLES WHERE Variable_name ='hostname';
+
+//display existing tables in current database:
+show tables;
+
+//show table character/attribute:
+describe uc_coverage;
+show columns from uc_coverage;
+SHOW CREATE TABLE tbl_test_cases;
+
+//delete table:
+delete from tbl_test_cases;
+
+//display table content:
+select * from table_name;
+select count(process_time) from tbl_test_cases where process_time = '2019-10-22';
+
+//change table content and attribute:
+
+
+//export database or table to files, inport database or table to database
+mysql -u root -h 10.135.157.122 -p'123456' mcd > mcd.sql
+mysqldump -u root -p123456 -h 127.0.0.1 mcd tbl_test_cases > tbl_test_cases.sql
+mysqldump -u root -p123456 -h 127.0.0.1 mcd uc_info_tab < uc_info_tab.sql
+mysqldump -u root -p123456 -h 127.0.0.1 mcd > mcd.sql
+mysqldump -u root -p123456 -h 127.0.0.1 mcd < mcd.sql
+
+
+
+////////////////////////////////////////////////////////////////////////
+select count(process_time) from tbl_test_cases where process_time = '2019-10-22';
+//order,desc,limit
+select category_owner from uc_info_tab where category_owner = 'O&M FRS&MZ' ORDER BY fb DESC LIMIT 2;
+//display as another name
+select svn_label as svnLabel, svn_address as svnAddress, description from tbl_test_cases
+select * from table_name;
+//special usage
+SELECT host FROM mysql.user WHERE User = 'root';
+SELECT User, Host, plugin FROM mysql.user;
+SELECT UPDATE_TIME FROM information_schema.tables WHERE  TABLE_SCHEMA = 'mcd' AND TABLE_NAME = 'uc_info_tab';
+SELECT @@character_set_database, @@collation_database;
+SELECT @@GLOBAL.sql_mode;
+select maxlen, character_set_name from information_schema.character_sets where character_set_name in('latin1', 'utf8', 'utf8mb4');
+//select from two table 
+select * from uc_info_tab, tbl_test_cases limit 2
+SELECT uc_info_tab.process_time, tbl_test_cases.process_time FROM uc_info_tab, tbl_test_cases limit 2;
+select process_time from uc_info_tab inner join tbl_test_cases order by process_time desc limit 1
+//use regular expression
+select count(process_time) from tbl_test_cases where process_time like  "%2020%";
+
+
+
+////////////////////////////////////////////////////////////////////////
+SHOW CHARACTER SET LIKE 'latin%';
+SHOW CHARACTER SET；
+show variables like '%collation%';
+SHOW VARIABLES LIKE 'sql_mode';
+show full processlist;
+SHOW GRANTS FOR 'root'@'%';
+SHOW SESSION VARIABLES LIKE 'wait_timeout';
+SHOW CHARACTER SET;
+SHOW TABLE STATUS LIKE 'tbl_test_cases';
+
+
+
+////////////////////////////////////////////////////////////////////////
+//modify to longtext 
+alter table uc_coverage modify column PIT_case_name longtext;
+alter table uc_info_tab add column process_time varchar(50);
+ALTER TABLE uc_info_tab ADD UC_area varchar(100) DEFAULT 'NA' AFTER UC_ID;
+alter table uc_info_tab modify process_time varchar(50);
+//drop or add primary key to PersionId,Pname,PMID
+ALTER TABLE Persion DROP PRIMARY KEY;
+ALTER TABLE Persion ADD PRIMARY KEY (PersionId,Pname,PMID);
+//add constraint primary key between PK_Persion and PersionId,Pname,PMID
+ALTER TABLE Persion ADD CONSTRAINT PK_Persion PRIMARY KEY (PersionId,Pname,PMID);
+//change user password
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+//create user
+CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+//change table encode set
+ALTER TABLE tbl_test_cases CONVERT TO CHARACTER SET utf8mb4;
+//delete column
+ALTER TABLE uc_coverage DROP jira_id
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+USE mysql;
+UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+FLUSH PRIVILEGES;
+//mannually set table content
+update tbl_test_cases set process_time = '2020-01-22'
+update tbl_test_cases set jira_id = ', FPB-57711' where case_name = "Startup_W_Frgt3WcdmaRel4Wmp";
+
+
+
+////////////////////////////////////////////////////////////////////////
+mysqladmin -u root -p123456 ping
+mysql --verbose --help
+replace into uc_coverage(UC_ID, number_of_total) values
+
+FLUSH PRIVILEGES; ALTER USER 'root'@'localhost' IDENTIFIED BY '123456'
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+FLUSH PRIVILEGES;
+
+sudo systemctl start mysql
+systemctl status mysql.service
+sudo ls /var/log/mysql
+
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'root'@'%';
+DROP USER 'root'@'%';
+
+sed -i 's/\r//g' gggggggg.txt
+
+tee trt.txt
+source svn1.sql;
+describe uc_coverage;
+kill 2620;
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+OperationalError: 2055: Lost connection to MySQL server at '10.159.111.192:3306', system error: 32 Broken pipe
+1366 (HY000): Incorrect string value: '\xE3\x80\x80LTE...' for column 'feature_id' at row 153 update uc logs failed!!!
+
+1366 (HY000): Incorrect string value: '\xE3\x80\x80LTE...' for column 'feature_id' at row 155 update uc logs failed!!!
+[['NA', ' LTE5425 Inter eNB LTE FDD and TDD CA configurations with Airscale', ' jqx473 ', ' 2019-12-05', ' jqx473 ', ' 2019-12-05', '1912', '2019-12-08', 'https://wrscmi.inside.nsn.com/isource/svnroot/BTS_DOCS_SC_OAM_LTE/SOAM/trunk/pfs/Northbound_Communication/NE3S_Adaptation/security_management/NE3SAdapt_Tls13Establishment.rst'], 
+['NA', ' RP002118 Support of TLS1.3 for Management plane', ' f6chen ', ' 2019-11-18', ' f6chen ', ' 2019-11-18', '1912', '2019-12-08', 'https://wrscmi.inside.nsn.com/isource/svnroot/BTS_DOCS_SC_OAM_LTE/SOAM/trunk/pfs/Northbound_Communication/Connection_Management/NorthComm_TLSv1.3ConnectionEstablishment.rst'], 
+['NA', ' 5GC00000, 5GC001804', ' wzaremba ', ' 2019-05-22', ' popiel ', ' 2019-05-28', '1905', '2019-12-08', 'https://wrscmi.inside.nsn.com/isource/svnroot/BTS_DOCS_SC_OAM_LTE/SOAM/trunk/pfs/Testability_Management/rat_specific_5g/TestLogsMgmt_5gDectivatePcmd.rst'], 
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
++------------------------------+-----------------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+------------------+----------------------------+-------------------+-------------------+-----------------+---------------+-------------+------------------+----------+----------+
+| UC_ID                        | category_owners | FB   | UC_link_address                                                                                                                                                                     | first_commit_time | last_commit_time | commit_PR_and_feature_info | first_author      | last_author       | all_author      | HW_unit       | feature_ref | requirement_ref  | status   | FS_type |
++------------------------------+-----------------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+------------------+----------------------------+-------------------+-------------------+-----------------+---------------+-------------+------------------+----------+----------+
+| HwMgmtCore_OamDpEnabling     | O&M CELL-MGMT   |      | https://wrscmi.inside.nsn.com/isource/svnroot/BTS_DOCS_SC_OAM_LTE/SOAM/trunk/pfs/Radio_Module_Management/CPRI_IR_Radio_Management/StateManagement/HwMgmtCore_OamDpEnabling.rst      | 2019/4/5          |                  | PR000000                   | pfs_first_author  | pfs_last_authour  | pfs_all_author  | F-SM-3,A-SM-4 | LTE2745     | LTE_OPR_REQ_7638 | Approved | PFS      |
+| RMgmtCPRIIR_CpriIrRadioReset | O&M CU          |      | https://wrscmi.inside.nsn.com/isource/svnroot/BTS_DOCS_SC_OAM_LTE/SOAM/trunk/icfs/Radio_Module_Management/CPRI_IR_Radio_Management/StateManagement/RMgmtCPRIIR_CpriIrRadioReset.rst | 2019/8/5          |                  | PR111111                   | icfs_first_author | icfs_last_authour | icfs_all_author | F-SM-3,A-SM-4 | LTE2746     | LTE_OPR_REQ_7639 | Approved | ICFS     |
++------------------------------+-----------------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------+------------------+----------------------------+-------------------+-------------------+-----------------+---------------+-------------+------------------+----------+----------+
+2 rows in set (0.00 sec)
+
+CREATE TABLE tbl_test_cases (
+      svn_label varchar(10),
+      svn_address varchar(255),
+      description text,
+      author varchar(255) NOT NULL,
+      last_committer varchar(255) NOT NULL,
+      last_commit_date varchar(255) NOT NULL,
+      revision varchar(255) NOT NULL,
+      tags varchar(255) NOT NULL,
+      feature text NOT NULL,
+      use_case text NOT NULL,
+      case_link varchar(255) NOT NULL,
+      case_name varchar(255) NOT NULL,
+      pronto varchar(255) NOT NULL,
+      fb varchar(255) NOT NULL,
+      process_time varchar(255) NOT NULL,
+      PRIMARY KEY (case_name)
+    );
+
+create table yawu_test ( id int );
+
+CREATE TABLE `tbl_test_cases` (
+      `svn_label` varchar(10) DEFAULT NULL,
+      `svn_address` varchar(255) DEFAULT NULL,
+      `description` mediumtext,
+      `author` mediumtext,
+      `last_committer` varchar(255) NOT NULL,
+      `last_commit_date` varchar(255) NOT NULL,
+      `revision` varchar(255) NOT NULL,
+      `tags` varchar(255) NOT NULL,
+      `feature` mediumtext NOT NULL,
+      `jira_id` varchar(255) NOT NULL,
+      `use_case` mediumtext NOT NULL,
+      `case_link` varchar(255) NOT NULL,
+      `case_name` varchar(255) NOT NULL,
+      `pronto` varchar(255) NOT NULL,
+      `fb` varchar(255) NOT NULL,
+      `process_time` varchar(255) NOT NULL,
+      PRIMARY KEY (`case_name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+from mysql.connector import (
+    errorcode, connect
+)
+
+mysql> SHOW VARIABLES WHERE Variable_name ='hostname';
++---------------+--------------------+
+| Variable_name | Value              |
++---------------+--------------------+
+| hostname      | bigtree-VirtualBox |
+ping bigtree-VirtualBox
+64 bytes from bigtree-VirtualBox (127.0.1.1): icmp_seq=1 ttl=64 time=0.051 ms
++---------------+--------------------+
+mysql> SHOW VARIABLES WHERE Variable_name ='port';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| port          | 3306  |
++---------------+-------+
+
+
+
