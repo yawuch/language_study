@@ -1,0 +1,19 @@
+//////////////////////////////////////////////////////////////////
+C++14 Variable Templates: what is their purpose? Any usage example?
+/////////////////////////////////////////////////////////////////
+Currently, it seems to instantiate the variables separately for the type. i.e., you could assign 10 to n<int> and it would be different from the template definition.
+
+template<typename T>
+T n = T(5);
+
+int main()
+{
+    n<int> = 10;
+    std::cout << n<int> << " ";    // 10
+    std::cout << n<double> << " "; // 5
+}
+If the declaration is const, it is readonly. If it's a constexpr, like all constexpr declarations, it has not much use outside constexpr(ressions).
+
+
+
+
